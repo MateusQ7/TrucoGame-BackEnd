@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -17,7 +18,7 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public void register(@RequestBody @Valid UserRegister data){
+    public void register(@RequestBody UserRegister data){
         repository.save(new User(data));
     }
 
@@ -31,5 +32,11 @@ public class UserController {
     public void update(@RequestBody @Valid UserUpdate data){
         var users = repository.getReferenceById(data.id());
         users.updateData(data);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void deleteUser(@PathVariable Long id){
+        repository.deleteById(id);
     }
 }
