@@ -1,5 +1,6 @@
 package com.example.trucobackend.controllers;
 
+import com.example.trucobackend.response.BackResponse;
 import com.example.trucobackend.user.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,9 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public void register(@RequestBody UserRegister data){
+    public BackResponse register(@RequestBody @Valid UserRegister data){
         repository.save(new User(data));
+        return new BackResponse("200", "Usuario cadastrado com sucesso!");
     }
 
     @GetMapping
