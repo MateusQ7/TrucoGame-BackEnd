@@ -1,10 +1,7 @@
 package com.example.trucobackend.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,9 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "users_login")
+@Table(name = "userslogin")
 @Entity(name = "UserLogin")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -25,6 +23,14 @@ public class UserLogin implements UserDetails {
     private Long id;
     private String login;
     private String password;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public Long getId(){
+        return id;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
